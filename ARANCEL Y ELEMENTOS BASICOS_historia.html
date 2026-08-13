@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aranceles · Historia, Expertos y Elementos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: #eef2f7;
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            color: #1a2b3f;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 25px 70px rgba(0, 20, 40, 0.12);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        /* HEADER */
+        .header {
+            padding: 2rem 2.5rem 0.8rem 2.5rem;
+            background: #ffffff;
+            border-bottom: 1px solid #e9eef4;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #0a2540, #1f5a8e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .header .subhead {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #4b6584;
+            margin-top: 0.2rem;
+            padding-left: 1.2rem;
+            border-left: 4px solid #2a7de1;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 0.25rem;
+            padding: 0 2.5rem;
+            background: #fafcfe;
+            border-bottom: 1px solid #e9eef4;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 0.9rem 1.8rem 0.8rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4d667f;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: 0.2px;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: #0a2540;
+            background: rgba(42, 125, 225, 0.05);
+        }
+
+        .tab-btn.active {
+            color: #0a2540;
+            border-bottom-color: #2a7de1;
+            background: rgba(42, 125, 225, 0.07);
+        }
+
+        .tab-btn .icon {
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        /* PANELS */
+        .panels {
+            padding: 2rem 2.5rem 2.5rem 2.5rem;
+            background: #ffffff;
+        }
+
+        .panel {
+            display: none;
+            animation: fadeSlide 0.35s ease forwards;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+                   PANEL 1: EXPERTOS (TARJETAS)
+                ============================================ */
+        .expert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .expert-card {
+            background: #f8fbff;
+            border-radius: 22px;
+            padding: 1.6rem 1.6rem 1.8rem;
+            border: 1px solid #e2edf7;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .expert-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 32px rgba(26, 74, 122, 0.08);
+            border-color: #b6d0e8;
+        }
+
+        .expert-card .name {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #0f3b66;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.3rem 0.7rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .expert-card .name small {
+            font-weight: 400;
+            color: #5d748f;
+            font-size: 0.8rem;
+        }
+
+        .expert-card .quote {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: #1a3047;
+            flex: 1;
+            margin-top: 0.4rem;
+        }
+
+        .expert-card .quote::before {
+            content: "“";
+            font-size: 1.5rem;
+            color: #2a7de1;
+            font-weight: 700;
+            margin-right: 2px;
+        }
+
+        .expert-card .quote::after {
+            content: "”";
+            font-size: 1.5rem;
+            color: #2a7de1;
+            font-weight: 700;
+            margin-left: 2px;
+        }
+
+        /* ============================================
+                   PANEL 2: ELEMENTOS (DETALLE EXTENSO)
+                ============================================ */
+        .element-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.2rem;
+        }
+
+        .element-item {
+            background: #f7fbff;
+            border-radius: 22px;
+            padding: 1.8rem 2rem 2rem 2rem;
+            border-left: 7px solid #2a7de1;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .element-item:hover {
+            background: #f2f9ff;
+            box-shadow: 0 6px 18px rgba(0, 40, 80, 0.04);
+        }
+
+        .element-item .title-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.6rem 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .element-item .title-row h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0a2540;
+        }
+
+        .element-item .badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #dce8f5;
+            color: #1a4a7a;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        .detail-block {
+            margin-top: 1rem;
+        }
+
+        .detail-block .label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #3b5e7e;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-block .content {
+            font-size: 0.98rem;
+            line-height: 1.7;
+            color: #1f344c;
+        }
+
+        .detail-block .content strong {
+            color: #0a2540;
+            font-weight: 600;
+        }
+
+        .detail-block .content ul,
+        .detail-block .content ol {
+            margin: 0.5rem 0 0.2rem 1.5rem;
+            padding-left: 0.2rem;
+        }
+
+        .detail-block .content ul li,
+        .detail-block .content ol li {
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-block .content .example {
+            background: #eaf1fa;
+            padding: 0.3rem 1rem;
+            border-radius: 12px;
+            display: inline-block;
+            font-weight: 500;
+            color: #0f3b66;
+            margin: 0.2rem 0;
+        }
+
+        .implicancia {
+            margin-top: 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px dashed #c8d9eb;
+        }
+
+        .implicancia .label {
+            color: #a12b3a;
+        }
+
+        .implicancia .content {
+            background: #fcf3f4;
+            padding: 0.6rem 1.2rem;
+            border-radius: 14px;
+            color: #4a1e26;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .implicancia .content strong {
+            color: #7a1f2b;
+        }
+
+        /* ============================================
+                   PANEL 3: HISTORIA (TIMELINE)
+                ============================================ */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.2rem 1.5rem 1.2rem 0;
+            border-left: 4px solid #d0dfec;
+            margin-left: 1.5rem;
+            padding-left: 2rem;
+            position: relative;
+            transition: background 0.2s;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .timeline-item:hover {
+            background: #f6faff;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            top: 1.5rem;
+            width: 16px;
+            height: 16px;
+            background: #2a7de1;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #2a7de1;
+        }
+
+        .timeline-item .period {
+            min-width: 110px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0a2540;
+            padding-top: 0.1rem;
+        }
+
+        .timeline-item .period small {
+            font-weight: 400;
+            color: #5d748f;
+            font-size: 0.85rem;
+            display: block;
+        }
+
+        .timeline-item .info {
+            flex: 1;
+        }
+
+        .timeline-item .info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a4a7a;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-item .info p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #1f344c;
+        }
+
+        .timeline-item .info .highlight {
+            background: #eaf1fa;
+            padding: 0.1rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 500;
+            color: #0f3b66;
+        }
+
+        /* FOOTER COMÚN */
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e3ecf5;
+            font-size: 0.9rem;
+            color: #5f748e;
+            text-align: center;
+            background: #fafcfe;
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 720px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .header {
+                padding: 1.5rem 1.2rem 0.5rem 1.2rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .tabs {
+                padding: 0 1.2rem;
+                gap: 0;
+            }
+            .tab-btn {
+                padding: 0.7rem 1rem 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            .panels {
+                padding: 1.5rem 1rem;
+            }
+            .expert-grid {
+                grid-template-columns: 1fr;
+            }
+            .element-item {
+                padding: 1.2rem 1rem;
+                border-left-width: 5px;
+            }
+            .element-item .title-row h3 {
+                font-size: 1.15rem;
+            }
+            .detail-block .content ul,
+            .detail-block .content ol {
+                margin-left: 1rem;
+            }
+
+            /* Timeline responsive */
+            .timeline-item {
+                flex-direction: column;
+                gap: 0.3rem;
+                margin-left: 0.8rem;
+                padding-left: 1.5rem;
+                padding-right: 0.5rem;
+            }
+            .timeline-item .period {
+                min-width: unset;
+                font-size: 1rem;
+            }
+            .timeline-item .period small {
+                display: inline;
+                margin-left: 0.4rem;
+            }
+            .timeline-item::before {
+                top: 1.2rem;
+                width: 12px;
+                height: 12px;
+                left: -8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>📊 Análisis integral del arancel</h1>
+        <div class="subhead">Historia · 5 autores clave · Desglose técnico de los 6 elementos esenciales</div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs" role="tablist">
+        <button class="tab-btn active" data-tab="historia" role="tab" aria-selected="true">
+            <span class="icon">📜</span> Historia
+        </button>
+        <button class="tab-btn" data-tab="expertos" role="tab" aria-selected="false">
+            <span class="icon">🧠</span> Expertos (5)
+        </button>
+        <button class="tab-btn" data-tab="elementos" role="tab" aria-selected="false">
+            <span class="icon">⚙️</span> Elementos en detalle
+        </button>
+    </div>
+
+    <!-- PANELS -->
+    <div class="panels">
+
+        <!-- ========================================= -->
+        <!-- PANEL 1: HISTORIA                         -->
+        <!-- ========================================= -->
+        <div class="panel active" id="panel-historia" role="tabpanel">
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="period">Antigüedad <small>(Grecia y Roma)</small></div>
+                    <div class="info">
+                        <h4>Origen recaudatorio: <span class="highlight">Portoria</span></h4>
+                        <p>Los primeros aranceles surgen como impuestos a las mercancías en puertos y puertas de ciudades. Su única función era <strong>recaudar fondos</strong> para el Estado, sin fines proteccionistas. Eran tasas fijas por unidad o por valor estimativo.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="period">Siglos XVI – XVIII <small>Mercantilismo</small></div>
+                    <div class="info">
+                        <h4>Instrumento de acumulación de riqueza</h4>
+                        <p>Los aranceles se convierten en una <strong>herramienta estratégica</strong> de los Estados-nación. Se imponen altos gravámenes a las importaciones para proteger la industria local y fomentar la balanza comercial positiva (exportar más que importar). El oro y la plata eran el objetivo final.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="period">Siglo XIX <small>Librecambismo</small></div>
+                    <div class="info">
+                        <h4>El giro hacia el libre comercio</h4>
+                        <p>Adam Smith y David Ricardo sientan las bases del librecambio. El hito es el <strong>Tratado Cobden-Chevalier (1860)</strong> entre Reino Unido y Francia, que reduce masivamente los aranceles e introduce la cláusula de <em>Nación Más Favorecida (NMF)</em>, promoviendo una era de relativa apertura comercial en Europa.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="period">1930 <small>Gran Depresión</small></div>
+                    <div class="info">
+                        <h4>El desastre proteccionista: <span class="highlight">Smoot-Hawley</span></h4>
+                        <p>Estados Unidos aprueba la Ley Smoot-Hawley, elevando aranceles a más de 20.000 productos. Provoca <strong>represalias globales</strong> y un colapso del comercio internacional (cae un 65%). Este evento marca el fin del librecambismo decimonónico y la necesidad de un orden comercial multilateral.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="period">1947 – 1995 <small>GATT y OMC</small></div>
+                    <div class="info">
+                        <h4>La institucionalización del comercio</h4>
+                        <p>En 1947 se firma el <strong>Acuerdo General sobre Aranceles y Comercio (GATT)</strong>, con el objetivo de reducir los aranceles mediante rondas de negociación (Kennedy, Tokyo, Uruguay). En 1995 nace la <strong>Organización Mundial del Comercio (OMC)</strong>, que consolida los aranceles y establece un sistema de solución de diferencias.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="period">Siglo XXI <small>Actualidad</small></div>
+                    <div class="info">
+                        <h4>Globalización vs. nuevo proteccionismo</h4>
+                        <p>El auge de los Tratados de Libre Comercio (TLC) convive con un <strong>resurgimiento del proteccionismo</strong>. Ejemplos: la guerra comercial EE.UU.-China (aranceles del 25% a miles de productos), el Brexit, y el uso de aranceles como <strong>arma geopolítica</strong> y de defensa de la industria estratégica (semiconductores, vehículos eléctricos).</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- PANEL 2: EXPERTOS (5)                     -->
+        <!-- ========================================= -->
+        <div class="panel" id="panel-expertos" role="tabpanel">
+            <div class="expert-grid">
+
+                <div class="expert-card">
+                    <div class="name">Paul R. Krugman <small>Premio Nobel de Economía</small></div>
+                    <div class="quote">El arancel es un impuesto que grava los bienes cuando cruzan una frontera nacional. Su propósito principal es generar ingresos fiscales o proteger a la industria local de la competencia extranjera, aunque su efecto final suele ser una pérdida de eficiencia agregada.</div>
+                </div>
+
+                <div class="expert-card">
+                    <div class="name">Maurice Obstfeld <small>UC Berkeley</small></div>
+                    <div class="quote">El arancel es un instrumento de política comercial que modifica el precio relativo de los bienes importados respecto de los nacionales, actuando como una cuña entre el precio internacional y el precio doméstico. Su incidencia recae sobre consumidores y productores, y su diseño determina el grado de distorsión en los mercados.</div>
+                </div>
+
+                <div class="expert-card">
+                    <div class="name">Jagdish N. Bhagwati <small>Columbia University</small></div>
+                    <div class="quote">El arancel es un tributo aduanero que, además de su función fiscal, sirve como herramienta estratégica en negociaciones comerciales. Puede ser específico (por unidad física) o ad valorem (porcentaje del valor), y su uso prolongado genera ‘rentas’ que pueden ser capturadas por grupos de interés, distorsionando la asignación óptima de recursos.</div>
+                </div>
+
+                <div class="expert-card">
+                    <div class="name">Alan V. Deardorff <small>University of Michigan</small></div>
+                    <div class="quote">Desde la perspectiva del comercio internacional, el arancel es un costo de transacción impuesto por el Estado a las importaciones (o, menos frecuentemente, a las exportaciones). Su efecto inmediato es aumentar el precio del bien importado, reduciendo la cantidad demandada y favoreciendo la producción doméstica, pero siempre a costa del bienestar del consumidor.</div>
+                </div>
+
+                <div class="expert-card">
+                    <div class="name">Michael J. Finger <small>ex economista del Banco Mundial</small></div>
+                    <div class="quote">El arancel es el instrumento más visible y medible de la política comercial. Se define legalmente como el gravamen que se aplica sobre el valor, la cantidad o el peso de las mercancías que ingresan a un territorio aduanero. Su estructura (niveles, escalonamiento, franjas) refleja las prioridades industriales y las concesiones multilaterales del país.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- PANEL 3: ELEMENTOS (DETALLE EXTENSO)      -->
+        <!-- ========================================= -->
+        <div class="panel" id="panel-elementos" role="tabpanel">
+            <div class="element-list">
+
+                <!-- ELEMENTO 1: BASE IMPONIBLE -->
+                <div class="element-item">
+                    <div class="title-row">
+                        <h3>1. Base Imponible</h3>
+                        <span class="badge">Sujeto de gravamen</span>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">📌 Definición técnica</span>
+                        <div class="content">Magnitud (valor o cantidad física) sobre la cual se aplica directamente el tipo de derecho arancelario. Es el "sujeto material" del impuesto aduanero.</div>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">🧩 Tipos y aplicación práctica</span>
+                        <div class="content">
+                            <ul>
+                                <li><strong>Ad valorem (basada en valor):</strong> Se aplica un porcentaje sobre el valor en aduana. <span class="example">Ej: 8% del valor CIF.</span> Es la más común, pero requiere valoración precisa.</li>
+                                <li><strong>Específica (basada en cantidad):</strong> Monto fijo por unidad física (kg, litro, unidad). <span class="example">Ej: USD 2,50 por kg.</span> Fácil de administrar, pero no se ajusta a fluctuaciones de precios.</li>
+                                <li><strong>Mixta o compuesta:</strong> Combina ambas. <span class="example">Ej: 5% ad valorem + USD 1,00 por unidad.</span> Se usa en textiles o calzado para garantizar un piso recaudatorio.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="implicancia">
+                        <span class="label">⚡ Implicancia estratégica</span>
+                        <div class="content"><strong>Visión de Krugman:</strong> La elección de la base distorsiona el comercio de forma diferente. Una base específica protege más a productores de bienes de bajo precio; la ad valorem protege más a los de alto precio.</div>
+                    </div>
+                </div>
+
+                <!-- ELEMENTO 2: ALÍCUOTA -->
+                <div class="element-item">
+                    <div class="title-row">
+                        <h3>2. Tipo de derecho (Alícuota)</h3>
+                        <span class="badge">Tasa / Corazón de la protección</span>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">📌 Definición técnica</span>
+                        <div class="content">Coeficiente o monto que se aplica a la base imponible para obtener el tributo. Refleja la <strong>política comercial activa</strong> del país.</div>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">📊 Estructura escalonada (Tariff Escalation)</span>
+                        <div class="content">
+                            Los países aplican alícuotas crecientes según el grado de elaboración:
+                            <ul>
+                                <li><strong>Materias primas:</strong> 0% – 2% (para fomentar la industria local).</li>
+                                <li><strong>Insumos y bienes intermedios:</strong> 3% – 6%.</li>
+                                <li><strong>Productos terminados:</strong> 10% – 20% o más (protección de la producción final).</li>
+                            </ul>
+                            <p style="margin-top:0.5rem;"><strong>Tratos diferenciados:</strong> Nación Más Favorecida (NMF) → tasa base OMC. / Trato Preferencial (TLC o SGP) → tasa reducida o cero. / Arancel General → tasa más alta.</p>
+                        </div>
+                    </div>
+                    <div class="implicancia">
+                        <span class="label">⚡ Implicancia estratégica</span>
+                        <div class="content"><strong>Visión de Finger:</strong> Es el elemento más visible. Su estructura (niveles y franjas) revela las prioridades industriales y las concesiones logradas en rondas multilaterales.</div>
+                    </div>
+                </div>
+
+                <!-- ELEMENTO 3: CLASIFICACIÓN -->
+                <div class="element-item">
+                    <div class="title-row">
+                        <h3>3. Clasificación arancelaria</h3>
+                        <span class="badge">Nomenclatura / ADN</span>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">📌 Definición técnica</span>
+                        <div class="content">Código alfanumérico (Sistema Armonizado – SA de la OMA) que identifica inequívocamente la mercancía. 6 dígitos universales, ampliables a 8 o 10 dígitos a nivel nacional.</div>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">📖 Reglas de Interpretación (Reglas Generales del SA)</span>
+                        <div class="content">
+                            No es una búsqueda por nombre; se rige por 6 reglas legales. Las más críticas (Regla 3):
+                            <ul>
+                                <li><strong>Especificidad:</strong> La partida más detallada prevalece sobre la genérica.</li>
+                                <li><strong>Carácter esencial:</strong> En bienes compuestos, se clasifica según el componente que le da su función principal.</li>
+                                <li><strong>Última posición:</strong> Si dos partidas son igualmente admisibles, se elige la de numeración mayor.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="implicancia">
+                        <span class="label">⚡ Implicancia estratégica</span>
+                        <div class="content"><strong>Visión de Deardorff:</strong> Un error en el código SA (ej. clasificar calzado de seguridad como deportivo) puede cambiar la alícuota del 8% al 35% y modificar barreras no arancelarias. El arancel es un "costo de transacción", y la clasificación define si ese costo es bajo o exorbitante.</div>
+                    </div>
+                </div>
+
+                <!-- ELEMENTO 4: ORIGEN -->
+                <div class="element-item">
+                    <div class="title-row">
+                        <h3>4. Origen de las mercancías</h3>
+                        <span class="badge">Pasaporte comercial</span>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">📌 Definición técnica</span>
+                        <div class="content">Determina el país donde la mercancía fue obtenida, producida o transformada sustancialmente. No confundir con la procedencia (país de envío).</div>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">🌐 Dos grandes categorías</span>
+                        <div class="content">
+                            <ul>
+                                <li><strong>Origen No Preferencial:</strong> Para aplicar arancel NMF, antidumping o compensatorios. Criterio de "última transformación sustancial" (cambio de partida a 4 dígitos).</li>
+                                <li><strong>Origen Preferencial:</strong> Para acceder a TLCs. Reglas estrictas: <em>Cambio de clasificación</em> (ej. hilos se convierten en tela), <em>Valor Agregado Regional (VAR)</em> (ej. 45% de valor regional) y <em>Operaciones Específicas</em> (ej. teñido obligatorio).</li>
+                            </ul>
+                            <p style="margin-top:0.5rem;">Se certifica con el <strong>Certificado de Origen</strong> (digital o físico).</p>
+                        </div>
+                    </div>
+                    <div class="implicancia">
+                        <span class="label">⚡ Implicancia estratégica</span>
+                        <div class="content"><strong>Visión de Obstfeld:</strong> El origen modifica el precio relativo (arancel preferencial vs. general), actuando como una "cuña" que beneficia a los socios comerciales y distorsiona los mercados internos.</div>
+                    </div>
+                </div>
+
+                <!-- ELEMENTO 5: VALOR EN ADUANA -->
+                <div class="element-item">
+                    <div class="title-row">
+                        <h3>5. Valor en aduana</h3>
+                        <span class="badge">Precio ajustado</span>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">📌 Definición técnica</span>
+                        <div class="content">Valor económico asignado a la mercancía importada para el cálculo de derechos <em>ad valorem</em> e impuestos internos (IVA, ICE). No es simplemente la factura comercial.</div>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">📋 Métodos de Valoración (OMC) – Jerárquicos</span>
+                        <div class="content">
+                            <ol style="margin-left:1.2rem; padding-left:0.2rem;">
+                                <li><strong>Valor de Transacción (primario):</strong> Precio pagado ajustado por comisiones, envases, asistencia técnica, regalías y reembolsos.</li>
+                                <li><strong>Valor de Mercancías Idénticas o Similares.</strong></li>
+                                <li><strong>Valor Deducido:</strong> Basado en el precio de reventa en el país importador, menos utilidades y gastos.</li>
+                                <li><strong>Valor Calculado:</strong> Suma de costos de materiales, fabricación, gastos y ganancias en origen.</li>
+                                <li><strong>Valor de Recurso (Fallback):</strong> Combinación flexible de los métodos anteriores.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="implicancia">
+                        <span class="label">⚡ Implicancia estratégica</span>
+                        <div class="content"><strong>Visión de Bhagwati:</strong> El valor en aduana es el campo de batalla donde se generan "rentas". La sobrevaloración aumenta la base imponible (más impuestos), mientras que la subvaloración es una forma de elusión arancelaria que distorsiona la asignación de recursos.</div>
+                    </div>
+                </div>
+
+                <!-- ELEMENTO 6: TRATAMIENTO Y CONTINGENTES -->
+                <div class="element-item">
+                    <div class="title-row">
+                        <h3>6. Tratamiento arancelario y contingentes</h3>
+                        <span class="badge">Válvula de ajuste</span>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">📌 Definición técnica</span>
+                        <div class="content">Conjunto de mecanismos que <strong>modulan la aplicación efectiva</strong> del arancel base. Son las excepciones y matices a la regla general.</div>
+                    </div>
+                    <div class="detail-block">
+                        <span class="label">🔄 Subelementos clave</span>
+                        <div class="content">
+                            <ul>
+                                <li><strong>Contingentes (Cupos) Arancelarios:</strong> Volumen máximo con arancel preferencial (ej. 0%). Superado el cupo, se paga la alícuota plena.</li>
+                                <li><strong>Suspensión Arancelaria:</strong> Eliminación temporal del arancel para materias primas críticas no producidas localmente.</li>
+                                <li><strong>Admisión Temporal / Maquila (Drawback):</strong> Insumos importados con suspensión, siempre que el producto final se exporte. El arancel se devuelve (drawback).</li>
+                                <li><strong>Medidas de Salvaguardia:</strong> Sobretasas urgentes ante incrementos súbitos de importaciones que dañen la industria nacional.</li>
+                                <li><strong>Derechos Antidumping y Compensatorios:</strong> Aranceles adicionales específicos calculados sobre el margen de dumping o subvención.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="implicancia">
+                        <span class="label">⚡ Implicancia estratégica</span>
+                        <div class="content"><strong>Visión de Krugman:</strong> Estos mecanismos buscan "amortiguar" la pérdida de eficiencia agregada. Un cupo bien calibrado permite proteger sin disparar el precio final; una salvaguardia mal usada genera inestabilidad comercial.</div>
+                    </div>
+                </div>
+
+            </div><!-- /element-list -->
+        </div><!-- /panel-elementos -->
+
+        <!-- FOOTER COMÚN -->
+        <div class="footer-note">
+            <span>🔗</span> Interrelación sistémica: <strong>Clasificación → Origen → Valor en Aduana → Base Imponible → Alícuota → Contingentes</strong>. 
+            Un error en cualquiera de estos eslabones modifica el tributo final y la viabilidad de la operación comercial. La historia nos muestra que los aranceles han oscilado entre ser herramientas de recaudación, protección y negociación geopolítica.
+        </div>
+
+    </div><!-- /panels -->
+</div><!-- /wrapper -->
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT PARA PESTAÑAS                     -->
+<!-- ============================================ -->
+<script>
+    (function() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = {
+            historia: document.getElementById('panel-historia'),
+            expertos: document.getElementById('panel-expertos'),
+            elementos: document.getElementById('panel-elementos')
+        };
+
+        function activateTab(tabId) {
+            // Actualizar botones
+            tabs.forEach(btn => {
+                const isActive = btn.dataset.tab === tabId;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            // Mostrar/ocultar paneles
+            Object.keys(panels).forEach(key => {
+                const panel = panels[key];
+                if (key === tabId) {
+                    panel.classList.add('active');
+                    panel.style.display = 'block';
+                } else {
+                    panel.classList.remove('active');
+                    panel.style.display = 'none';
+                }
+            });
+        }
+
+        // Event listeners
+        tabs.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tabId = this.dataset.tab;
+                if (tabId) activateTab(tabId);
+            });
+        });
+
+        // Inicializar: forzar el panel activo por defecto (Historia)
+        const activeTab = document.querySelector('.tab-btn.active');
+        if (activeTab) {
+            const initialTab = activeTab.dataset.tab;
+            if (initialTab) {
+                Object.keys(panels).forEach(key => {
+                    const panel = panels[key];
+                    if (key === initialTab) {
+                        panel.style.display = 'block';
+                        panel.classList.add('active');
+                    } else {
+                        panel.style.display = 'none';
+                        panel.classList.remove('active');
+                    }
+                });
+            }
+        } else {
+            // fallback seguro
+            activateTab('historia');
+        }
+    })();
+</script>
+
+</body>
+</html>
